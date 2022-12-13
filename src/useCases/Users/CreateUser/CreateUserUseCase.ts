@@ -1,6 +1,6 @@
-import { User } from "../entities/User";
-import { IMailProvider } from "../providers/IMailProvider";
-import { IUsersRepository } from "../repositories/IUsersRepository";
+import { User } from "../../../entities/User";
+import { IMailProvider } from "../../../providers/IMailProvider";
+import { IUsersRepository } from "../../../repositories/IUsersRepository";
 import { CreateUserRequestDTO } from "./CreateUserDTO";
 
 export class CreateUserUseCase {
@@ -10,12 +10,20 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(data: CreateUserRequestDTO) {
+    const usernameAlreadyExists = await this.usersRepository.findByEmail(
+      data.username
+    );
+
+    if (usernameAlreadyExists) {
+      throw new Error("Username or email already in use");
+    }
+
     const userAlreadyExists = await this.usersRepository.findByEmail(
       data.email
     );
 
     if (userAlreadyExists) {
-      throw new Error("User already exists");
+      throw new Error("Username or email already in use");
     }
 
     const user = new User(data);
