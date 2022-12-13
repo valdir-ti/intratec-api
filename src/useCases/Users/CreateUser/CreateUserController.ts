@@ -14,7 +14,10 @@ export class CreateUserController {
         password,
         isAdmin,
       });
-      return res.status(201).send();
+      return res.status(201).send({
+        message: "User created successfully",
+        username
+      });
     } catch (err) {
       return res.status(400).json({
         message: err.message || "Unexpected error",

@@ -1,5 +1,5 @@
-import { MailtrapMailProvider } from "../providers/implementations/MailtrapMailProvider";
-import { MongoUsersProvider } from "../repositories/implementations/MongoUsersProvider";
+import { MailtrapMailProvider } from "../../../providers/implementations/MailtrapMailProvider";
+import { MongoUsersProvider } from "../../../repositories/implementations/Users/MongoUsersProvider";
 import { CreateUserController } from "./CreateUserController";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 

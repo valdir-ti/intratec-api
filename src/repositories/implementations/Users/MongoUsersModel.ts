@@ -7,6 +7,7 @@ interface IUser {
   email: string;
   password: string;
   isAdmin: boolean;
+  id: string;
 }
 
 const userSchema = new Schema<IUser>(
@@ -29,6 +30,9 @@ const userSchema = new Schema<IUser>(
       type: Boolean,
       default: false,
     },
+    id: {
+      type: String
+    }
   },
   {
     timestamps: true,
