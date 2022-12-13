@@ -1,10 +1,9 @@
 import MongoUsersUser from "./MongoUsersModel";
-import { User } from "../../../entities/User";
-import { IUsersRepository } from "../../IUsersRepository";
+import { User } from "../../../../entities/User";
+import { IUsersRepository } from "../../../IUsersRepository";
 import bcrypt from "bcryptjs";
 
 export class MongoUsersProvider implements IUsersRepository {
-
   async findByEmail(email: string): Promise<any> {
     const user = await MongoUsersUser.find({ email });
 
