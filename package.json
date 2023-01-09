@@ -7,7 +7,9 @@
     "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/index.ts",
     "postinstall": "tsc",
     "start": "node dist/index.js",
-    "restore": "yarn cache clean --force  && rm -rf node_modules && rm -rf yarn.lock && yarn install"
+    "restore": "yarn cache clean --force  && rm -rf node_modules && rm -rf yarn.lock && yarn install",
+    "test": "jest --passWithNoTests",
+    "test:watch": "yarn test --watch --coverage"
   },
   "keywords": [],
   "author": "",
