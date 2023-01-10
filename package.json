@@ -10,7 +10,7 @@
     "restore": "yarn cache clean --force  && rm -rf node_modules && rm -rf yarn.lock && yarn install",
     "test": "jest --passWithNoTests",
     "test:watch": "yarn test --watch --coverage",
-    "test:staged": "yarn test --coverage",
+    "test:staged": "yarn test",
     "husky:prepare": "husky install"
   },
   "keywords": [],
