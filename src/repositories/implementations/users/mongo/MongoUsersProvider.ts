@@ -4,6 +4,12 @@ import { IUsersRepository } from "../../../IUsersRepository"
 import bcrypt from "bcryptjs"
 
 export class MongoUsersProvider implements IUsersRepository {
+
+  async findAll(): Promise<unknown> {
+    const users = await MongoUsersUser.find()
+    return users
+  }
+
   async findByEmail(email: string): Promise<unknown> {
     const user = await MongoUsersUser.find({ email })
 

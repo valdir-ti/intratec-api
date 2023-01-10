@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express"
-import { authRouter } from "./routes"
+import { authRouter, usersRouter } from "./routes"
 
 const app = express()
 
@@ -10,5 +10,6 @@ app.get("/", (req: Request, res: Response) => {
 })
 
 app.use("/auth", authRouter)
+app.use("/users", usersRouter)
 
 export { app }
