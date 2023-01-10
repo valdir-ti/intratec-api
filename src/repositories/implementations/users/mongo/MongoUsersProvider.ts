@@ -4,6 +4,14 @@ import { IUsersRepository } from "../../../IUsersRepository"
 import bcrypt from "bcryptjs"
 
 export class MongoUsersProvider implements IUsersRepository {
+  async findAll(): Promise<unknown> {
+    const users = await MongoUsersUser.find(
+      {},
+      { _id: 0, id: 1, username: 2, email: 3 }
+    )
+    return users
+  }
+
   async findByEmail(email: string): Promise<unknown> {
     const user = await MongoUsersUser.find({ email })
 
@@ -33,5 +41,14 @@ export class MongoUsersProvider implements IUsersRepository {
     const newUser = new MongoUsersUser(newU)
 
     await newUser.save()
+  }
+
+  async delete(id: string): Promise<boolean> {
+    const user = await MongoUsersUser.findOne({ id })
+
+    if (!user) return false
+
+    const userDeleted = await MongoUsersUser.deleteOne({ id })
+    return userDeleted.acknowledged
   }
 }
