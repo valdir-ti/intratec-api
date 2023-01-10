@@ -42,4 +42,13 @@ export class MongoUsersProvider implements IUsersRepository {
 
     await newUser.save()
   }
+
+  async delete(id: string): Promise<boolean> {
+    const user = await MongoUsersUser.findOne({ id })
+
+    if (!user) return false
+
+    const userDeleted = await MongoUsersUser.deleteOne({ id })
+    return userDeleted.acknowledged
+  }
 }
