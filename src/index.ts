@@ -7,15 +7,10 @@ dotenv.config()
 const port = process.env.PORT || 3333
 
 const connect = async () => {
-  console.log(process.env.MONGO_PASSWORD)
-  try {
-    const mongo_url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.72clvyp.mongodb.net/?retryWrites=true&w=majority`
-    mongoose.set("strictQuery", false)
-    await mongoose.connect(mongo_url || "")
-    console.log("Connected to mongoDB")
-  } catch (error) {
-    throw error
-  }
+  const mongo_url = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.72clvyp.mongodb.net/?retryWrites=true&w=majority`
+  mongoose.set("strictQuery", false)
+  await mongoose.connect(mongo_url || "")
+  console.log("Connected to mongoDB")
 }
 
 mongoose.connection.on("disconnected", () => {

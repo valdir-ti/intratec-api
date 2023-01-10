@@ -9,7 +9,8 @@
     "start": "node dist/index.js",
     "restore": "yarn cache clean --force  && rm -rf node_modules && rm -rf yarn.lock && yarn install",
     "test": "jest --passWithNoTests",
-    "test:watch": "yarn test --watch --coverage"
+    "test:watch": "yarn test --watch --coverage",
+    "lint": "eslint src/**/*.ts"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +24,11 @@
     "@types/mongoose": "^5.11.97",
     "@types/nodemailer": "^6.4.6",
     "@types/uuidv4": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
     "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "husky": "^8.0.3",
     "jest": "^29.3.1",
     "prettier": "^2.8.2",
     "ts-node-dev": "^2.0.0",

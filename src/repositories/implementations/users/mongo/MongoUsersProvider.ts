@@ -4,7 +4,7 @@ import { IUsersRepository } from "../../../IUsersRepository"
 import bcrypt from "bcryptjs"
 
 export class MongoUsersProvider implements IUsersRepository {
-  async findByEmail(email: string): Promise<any> {
+  async findByEmail(email: string): Promise<unknown> {
     const user = await MongoUsersUser.find({ email })
 
     if (user.length === 0) {
@@ -14,7 +14,7 @@ export class MongoUsersProvider implements IUsersRepository {
     return user
   }
 
-  async findByUserName(username: string): Promise<any> {
+  async findByUserName(username: string): Promise<unknown> {
     const user = await MongoUsersUser.find({ username })
 
     if (user.length === 0) {
@@ -30,7 +30,7 @@ export class MongoUsersProvider implements IUsersRepository {
 
     const newU = { ...user, id: user.id, password: hash }
 
-    const newUser: any = new MongoUsersUser(newU)
+    const newUser = new MongoUsersUser(newU)
 
     await newUser.save()
   }
