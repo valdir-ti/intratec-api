@@ -10,7 +10,8 @@
     "restore": "yarn cache clean --force  && rm -rf node_modules && rm -rf yarn.lock && yarn install",
     "test": "jest --passWithNoTests",
     "test:watch": "yarn test --watch --coverage",
-    "lint": "eslint src/**/*.ts"
+    "test:staged": "yarn test",
+    "husky:prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "eslint-config-prettier": "^8.6.0",
     "husky": "^8.0.3",
     "jest": "^29.3.1",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.8.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^4.9.4"
