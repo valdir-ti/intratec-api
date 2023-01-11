@@ -10,10 +10,11 @@ export class MongoUsersProvider implements IUsersRepository {
       { _id: 0, id: 1, username: 2, email: 3, isAdmin: 4 }
     )
 
-    if (!user) return null
+    if (user.length === 0) return null
 
     return user
   }
+
   async findAll(): Promise<unknown> {
     const users = await MongoUsersUser.find(
       {},
