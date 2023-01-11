@@ -25,7 +25,10 @@ export const verifyToken = (
     const secret = process.env.JWT_SECRET || "secretkey"
 
     jwt.verify(access_token, secret, (err: unknown, user: unknown) => {
-      if (err) return res.status(401).json("Invalid credentials")
+      if (err)
+        return res
+          .status(401)
+          .json({ status: false, message: "Invalid credentials" })
 
       req.user = user
       next()
