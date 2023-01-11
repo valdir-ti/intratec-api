@@ -1,6 +1,5 @@
 describe("Delete user use case", () => {
   test("should delete an user", () => {
-    const userDeleted = true
-    expect(userDeleted).toBe(true)
+    expect(1 + 1).toBe(2)
   })
 })
