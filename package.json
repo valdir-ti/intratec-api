@@ -11,7 +11,8 @@
     "test": "jest --passWithNoTests",
     "test:watch": "yarn test --watch --coverage",
     "test:staged": "yarn test",
-    "husky:prepare": "husky install"
+    "husky:prepare": "husky install",
+    "commit": "git-cz"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,8 @@
     "@types/uuidv4": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
+    "commitizen": "^4.2.6",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.6.0",
     "husky": "^8.0.3",
@@ -45,5 +48,10 @@
     "nodemailer": "^6.8.0",
     "ts-jest": "^29.0.3",
     "uuidv4": "^6.2.13"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
