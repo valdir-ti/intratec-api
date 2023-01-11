@@ -11,5 +11,7 @@ export interface IUsersRepository {
 
   save(user: User): Promise<void>
 
+  update(id: string, data: User): Promise<User | unknown>
+
   delete(id: string): Promise<boolean>
 }

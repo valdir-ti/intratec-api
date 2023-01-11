@@ -3,6 +3,7 @@ import { deleteUserController } from "../useCases/Users/DeleteUser"
 import { getUserController } from "../useCases/Users/GetUser"
 import { listUserController } from "../useCases/Users/ListUsers"
 import { verifyAdmin, verifyToken } from "../middlewares"
+import { updateUserController } from "../useCases/Users/UpdateUser"
 
 const usersRouter = Router()
 
@@ -16,6 +17,10 @@ usersRouter.delete("/:id", verifyToken, verifyAdmin, (req, res) => {
 
 usersRouter.get("/:id", verifyToken, (req, res) => {
   return getUserController.handle(req, res)
+})
+
+usersRouter.patch("/:id", verifyToken, verifyAdmin, (req, res) => {
+  return updateUserController.handle(req, res)
 })
 
 export { usersRouter }
