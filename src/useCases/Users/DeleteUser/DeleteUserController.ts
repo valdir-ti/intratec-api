@@ -9,7 +9,7 @@ export class DeleteUserController {
 
     if (resp) {
       return res
-        .status(204)
+        .status(200)
         .json({ userId: id, status: resp, message: "user deleted" })
     }
 

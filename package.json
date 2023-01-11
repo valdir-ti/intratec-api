@@ -11,7 +11,8 @@
     "test": "jest --passWithNoTests",
     "test:watch": "yarn test --watch --coverage",
     "test:staged": "yarn test",
-    "husky:prepare": "husky install"
+    "husky:prepare": "husky install",
+    "commit": "git-cz"
   },
   "keywords": [],
   "author": "",
@@ -46,5 +47,10 @@
     "nodemailer": "^6.8.0",
     "ts-jest": "^29.0.3",
     "uuidv4": "^6.2.13"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
