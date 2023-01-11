@@ -24,7 +24,7 @@ export class LoginUserUseCase {
       { id: user[0].id, isAdmin: user[0].isAdmin },
       secret,
       {
-        expiresIn: "1h",
+        expiresIn: "1d",
       }
     )
 
