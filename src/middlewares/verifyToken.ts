@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import { NextFunction, Request, Response } from "express"
+import { IUser } from "../@types"
 
 export const verifyToken = (
   req: Request,
@@ -24,7 +25,7 @@ export const verifyToken = (
 
     const secret = process.env.JWT_SECRET || "secretkey"
 
-    jwt.verify(access_token, secret, (err: unknown, user: unknown) => {
+    jwt.verify(access_token, secret, (err: unknown, user: IUser) => {
       if (err)
         return res
           .status(401)
@@ -34,6 +35,6 @@ export const verifyToken = (
       next()
     })
   } catch (error) {
-    return res.status(500).json({ error: error })
+    return res.status(500).json({ error: error.message })
   }
 }
