@@ -6,12 +6,12 @@ import { CreateUserRequestDTO } from "./CreateUserDTO"
 export class CreateUserUseCase {
   constructor(
     private usersRepository: IUsersRepository,
-    private mailProvider: IMailProvider,
+    private mailProvider: IMailProvider
   ) {}
 
   async execute(data: CreateUserRequestDTO) {
     const usernameAlreadyExists = await this.usersRepository.findByEmail(
-      data.username,
+      data.username
     )
 
     if (usernameAlreadyExists) {
@@ -38,7 +38,7 @@ export class CreateUserUseCase {
         email: "intratec@gmail.com",
       },
       subject: "Seja bem vindo a plataforma",
-      body: "<p>Você já pode acessar a nossa plataforma</p>",
+      body: `<p>Olá <b>${data.username}</b> você já pode acessar a nossa plataforma</p>`,
     })
   }
 }
