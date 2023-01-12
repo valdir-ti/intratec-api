@@ -19,7 +19,7 @@ export const verifyAdmin = (
       } else {
         return res
           .status(401)
-          .json({ status: false, message: "You are not admin" })
+          .json({ status: false, message: "You are not user active" })
       }
     })
   } catch (error) {
