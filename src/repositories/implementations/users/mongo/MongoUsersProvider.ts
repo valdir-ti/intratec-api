@@ -3,6 +3,15 @@ import { User } from "../../../../entities/User"
 import { IUsersRepository } from "../../../IUsersRepository"
 import bcrypt from "bcryptjs"
 
+const excludedObjFields = {
+  _id: 0,
+  id: 0,
+  __v: 0,
+  createdAt: 0,
+  updatedAt: 0,
+  password: 0,
+}
+
 export class MongoUsersProvider implements IUsersRepository {
   async findByCPF(cpf: string): Promise<unknown> {
     const user = await MongoUsersUser.find({ cpf })
@@ -15,22 +24,7 @@ export class MongoUsersProvider implements IUsersRepository {
   }
 
   async findById(id: string): Promise<unknown> {
-    const user = await MongoUsersUser.find(
-      { id },
-      {
-        _id: 0,
-        id: 1,
-        name: 2,
-        lastName: 3,
-        photo: 4,
-        birthdate: 5,
-        email: 6,
-        cpf: 7,
-        level: 8,
-        isActive: 9,
-        companies: 10,
-      }
-    )
+    const user = await MongoUsersUser.find({ id }, excludedObjFields)
 
     if (user.length === 0) return null
 
@@ -38,22 +32,7 @@ export class MongoUsersProvider implements IUsersRepository {
   }
 
   async findAll(): Promise<User[]> {
-    const users = await MongoUsersUser.find(
-      {},
-      {
-        _id: 0,
-        id: 1,
-        name: 2,
-        lastName: 3,
-        photo: 4,
-        birthdate: 5,
-        email: 6,
-        cpf: 7,
-        level: 8,
-        isActive: 9,
-        companies: 10,
-      }
-    )
+    const users = await MongoUsersUser.find({}, excludedObjFields)
     return users
   }
 
@@ -66,16 +45,6 @@ export class MongoUsersProvider implements IUsersRepository {
 
     return user
   }
-
-  // async findByUserName(username: string): Promise<unknown> {
-  //   const user = await MongoUsersUser.find({ username })
-
-  //   if (user.length === 0) {
-  //     return null
-  //   }
-
-  //   return user
-  // }
 
   async save(user: User): Promise<void> {
     const salt = bcrypt.genSaltSync(10)

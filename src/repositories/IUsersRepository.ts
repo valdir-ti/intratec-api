@@ -5,8 +5,6 @@ export interface IUsersRepository {
 
   findByCPF(cpf: string): Promise<User | unknown>
 
-  // findByUserName(username: string): Promise<User | unknown>
-
   findAll(): Promise<User | unknown>
 
   findById(id: string): Promise<User | unknown>
