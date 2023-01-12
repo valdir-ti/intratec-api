@@ -10,18 +10,18 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(data: CreateUserRequestDTO) {
-    const usernameAlreadyExists = await this.usersRepository.findByEmail(
-      data.username
-    )
+    const cpfAlreadyExists = await this.usersRepository.findByCPF(data.cpf)
 
-    if (usernameAlreadyExists) {
-      throw new Error("Username or email already in use")
+    if (cpfAlreadyExists) {
+      throw new Error("CPF already in use")
     }
 
-    const userAlreadyExists = await this.usersRepository.findByEmail(data.email)
+    const emailAlreadyExists = await this.usersRepository.findByEmail(
+      data.email
+    )
 
-    if (userAlreadyExists) {
-      throw new Error("Username or email already in use")
+    if (emailAlreadyExists) {
+      throw new Error("Email already in use")
     }
 
     const user = new User(data)
@@ -30,7 +30,7 @@ export class CreateUserUseCase {
 
     await this.mailProvider.sendMail({
       to: {
-        name: data.username,
+        name: data.name,
         email: data.email,
       },
       from: {
@@ -38,7 +38,7 @@ export class CreateUserUseCase {
         email: "intratec@gmail.com",
       },
       subject: "Seja bem vindo a plataforma",
-      body: `<p>Olá <b>${data.username}</b> você já pode acessar a nossa plataforma</p>`,
+      body: `<p>Olá <b>${data.name}</b> você já pode acessar a nossa plataforma</p>`,
     })
   }
 }

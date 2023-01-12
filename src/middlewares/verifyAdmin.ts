@@ -8,7 +8,7 @@ export const verifyAdmin = (
 ) => {
   try {
     verifyToken(req, res, () => {
-      if (req.user.isAdmin) {
+      if (req.user.isActive) {
         next()
       } else {
         return res

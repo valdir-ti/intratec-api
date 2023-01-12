@@ -4,21 +4,47 @@ import { MongoResult } from "./IMongoResult"
 const { Schema, model } = mongoose
 
 interface IUser extends MongoResult {
-  username: string
+  name: string
+  lastName: string
+  photo: string
+  birthdate: string
   email: string
+  cpf: string
   password: string
-  isAdmin: boolean
+  level: {
+    type: string
+    enum: ["user", "manager", "admin"]
+    default: 0
+  }
+  isActive: boolean
+  companies: []
+  respId: string
   id: string
 }
 
 const userSchema = new Schema<IUser>(
   {
-    username: {
+    name: {
+      type: String,
+      require: true,
+    },
+    lastName: {
+      type: String,
+      default: "",
+    },
+    photo: {
+      type: String,
+      default: "",
+    },
+    birthdate: {
+      type: String,
+    },
+    email: {
       type: String,
       require: true,
       unique: true,
     },
-    email: {
+    cpf: {
       type: String,
       require: true,
       unique: true,
@@ -27,9 +53,18 @@ const userSchema = new Schema<IUser>(
       type: String,
       require: true,
     },
-    isAdmin: {
+    level: {
+      type: String,
+    },
+    isActive: {
       type: Boolean,
-      default: false,
+      default: true,
+    },
+    companies: {
+      type: [],
+    },
+    respId: {
+      type: String,
     },
     id: {
       type: String,

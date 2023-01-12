@@ -4,10 +4,20 @@ import { IUsersRepository } from "../../../IUsersRepository"
 import bcrypt from "bcryptjs"
 
 export class MongoUsersProvider implements IUsersRepository {
+  async findByCPF(cpf: string): Promise<unknown> {
+    const user = await MongoUsersUser.find({ cpf })
+
+    if (user.length === 0) {
+      return null
+    }
+
+    return user
+  }
+
   async findById(id: string): Promise<unknown> {
     const user = await MongoUsersUser.find(
       { id },
-      { _id: 0, id: 1, username: 2, email: 3, isAdmin: 4 }
+      { _id: 0, id: 1, name: 2, email: 3, isAdmin: 4 }
     )
 
     if (user.length === 0) return null
@@ -18,7 +28,7 @@ export class MongoUsersProvider implements IUsersRepository {
   async findAll(): Promise<unknown> {
     const users = await MongoUsersUser.find(
       {},
-      { _id: 0, id: 1, username: 2, email: 3, isAdmin: 4 }
+      { _id: 0, id: 1, name: 2, email: 3, isAdmin: 4 }
     )
     return users
   }
@@ -33,21 +43,21 @@ export class MongoUsersProvider implements IUsersRepository {
     return user
   }
 
-  async findByUserName(username: string): Promise<unknown> {
-    const user = await MongoUsersUser.find({ username })
+  // async findByUserName(username: string): Promise<unknown> {
+  //   const user = await MongoUsersUser.find({ username })
 
-    if (user.length === 0) {
-      return null
-    }
+  //   if (user.length === 0) {
+  //     return null
+  //   }
 
-    return user
-  }
+  //   return user
+  // }
 
   async save(user: User): Promise<void> {
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(user.password, salt)
 
-    const newU = { ...user, id: user.id, password: hash }
+    const newU = { ...user, id: user.id, level: "user", password: hash }
 
     const newUser = new MongoUsersUser(newU)
 
