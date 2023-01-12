@@ -9,7 +9,13 @@ export const verifyAdmin = (
   try {
     verifyToken(req, res, () => {
       if (req.user.isActive) {
-        next()
+        if (req.user.level === "admin" || req.user.level === "manager") {
+          next()
+        } else {
+          return res
+            .status(401)
+            .json({ status: false, message: "You are not admin" })
+        }
       } else {
         return res
           .status(401)

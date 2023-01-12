@@ -11,17 +11,16 @@ export class LoginUserUseCase {
 
     if (!user) return false
 
-    const isCorrectPassword = bcrypt.compareSync(
-      data.password,
-      user[0].password
-    )
+    const { name, email, password, level, isActive, id } = user[0]
+
+    const isCorrectPassword = bcrypt.compareSync(data.password, password)
 
     if (!isCorrectPassword) return false
 
     const secret = process.env.JWT_SECRET || "secretkey"
 
     const token = jwt.sign(
-      { id: user[0].id, isAdmin: user[0].isAdmin },
+      { id: id, isActive: isActive, level: level },
       secret,
       {
         expiresIn: "1d",
@@ -29,9 +28,9 @@ export class LoginUserUseCase {
     )
 
     const userData = {
-      id: user[0].id,
-      username: user[0].username,
-      email: user[0].email,
+      id: id,
+      name: name,
+      email: email,
     }
 
     return { token, userData }
