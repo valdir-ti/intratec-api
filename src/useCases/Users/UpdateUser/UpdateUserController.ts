@@ -21,7 +21,7 @@ export class UpdateUserController {
         return res.status(400).json({ status: true, message: "user not found" })
       }
 
-      return res.status(201).json({ status: true, message: `user updated` })
+      return res.status(201).json({ status: true, message: "user updated" })
     } catch (error) {
       return res.status(500).json({ error: error })
     }

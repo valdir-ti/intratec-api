@@ -100,14 +100,18 @@ export class MongoUsersProvider implements IUsersRepository {
       return false
     }
 
-    const salt = bcrypt.genSaltSync(10)
-    const hash = bcrypt.hashSync(data.password, salt)
-
-    const newU = { ...data, password: hash }
-
-    await MongoUsersUser.findOneAndUpdate({ id: id }, newU, {
-      returnOriginal: false,
-    })
+    if (data.password) {
+      const salt = bcrypt.genSaltSync(10)
+      const hash = bcrypt.hashSync(data.password, salt)
+      const newU = { ...data, password: hash }
+      await MongoUsersUser.findOneAndUpdate({ id: id }, newU, {
+        returnOriginal: false,
+      })
+    } else {
+      await MongoUsersUser.findOneAndUpdate({ id: id }, data, {
+        returnOriginal: false,
+      })
+    }
 
     return true
   }
