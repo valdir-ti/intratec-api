@@ -1,8 +1,9 @@
 import mongoose from "mongoose"
+import { MongoResult } from "./IMongoResult"
 
 const { Schema, model } = mongoose
 
-interface IUser {
+interface IUser extends MongoResult {
   username: string
   email: string
   password: string
@@ -36,7 +37,7 @@ const userSchema = new Schema<IUser>(
   },
   {
     timestamps: true,
-  },
+  }
 )
 
 export default model<IUser>("User", userSchema)

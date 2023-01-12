@@ -9,6 +9,9 @@ export class GetUserController {
 
     const user = await this.getUserUseCase.execute(id)
 
-    return res.status(200).json(user)
+    if (!user)
+      return res.status(200).json({ status: false, message: "User not found" })
+
+    return res.status(200).json({ status: true, data: user })
   }
 }
