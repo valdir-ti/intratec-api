@@ -57,7 +57,12 @@ export class MongoUsersProvider implements IUsersRepository {
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(user.password, salt)
 
-    const newU = { ...user, id: user.id, level: "user", password: hash }
+    const newU = {
+      ...user,
+      id: user.id,
+      level: user.level ?? "user",
+      password: hash,
+    }
 
     const newUser = new MongoUsersUser(newU)
 
