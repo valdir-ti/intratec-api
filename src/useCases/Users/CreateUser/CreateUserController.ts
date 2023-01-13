@@ -16,6 +16,7 @@ export class CreateUserController {
       isActive,
       respId,
       level,
+      language,
     } = req.body
 
     const requiredFields = ["name", "cpf", "email", "password", "isActive"]
@@ -41,6 +42,7 @@ export class CreateUserController {
         isActive,
         respId,
         level,
+        language,
       })
       return res.status(201).send({
         message: "User created successfully",

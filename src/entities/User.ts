@@ -15,6 +15,11 @@ export class User {
     enum: ["user", "manager", "admin"]
     default: 0
   }
+  public language?: {
+    type: string
+    enum: ["pt", "en"]
+    default: 0
+  }
   public isActive: boolean
   public companies?: string[]
   public respId: string

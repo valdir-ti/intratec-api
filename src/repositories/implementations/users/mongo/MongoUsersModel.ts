@@ -16,6 +16,11 @@ interface IUser extends MongoResult {
     enum: ["user", "manager", "admin"]
     default: 0
   }
+  language: {
+    type: string
+    enum: ["pt", "en"]
+    default: 0
+  }
   isActive: boolean
   companies: []
   respId: string
@@ -54,6 +59,9 @@ const userSchema = new Schema<IUser>(
       require: true,
     },
     level: {
+      type: String,
+    },
+    language: {
       type: String,
     },
     isActive: {

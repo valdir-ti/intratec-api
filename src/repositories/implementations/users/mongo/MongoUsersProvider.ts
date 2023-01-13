@@ -53,6 +53,7 @@ export class MongoUsersProvider implements IUsersRepository {
       ...user,
       id: user.id,
       level: user.level ?? "user",
+      language: user.language ?? "pt",
       password: hash,
     }
 

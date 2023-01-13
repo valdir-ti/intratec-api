@@ -11,7 +11,7 @@ export class LoginUserUseCase {
 
     if (!user) return false
 
-    const { name, email, password, level, isActive, id } = user[0]
+    const { name, email, password, level, language, isActive, id } = user[0]
 
     const isCorrectPassword = bcrypt.compareSync(data.password, password)
 
@@ -31,6 +31,7 @@ export class LoginUserUseCase {
       id: id,
       name: name,
       email: email,
+      language: language,
     }
 
     return { token, userData }

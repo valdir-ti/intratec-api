@@ -3,6 +3,10 @@ enum Level {
   "manager",
   "admin",
 }
+enum Language {
+  "pt",
+  "en",
+}
 
 export interface UpdateUserRequestDTO {
   name: string
@@ -13,6 +17,7 @@ export interface UpdateUserRequestDTO {
   cpf: string
   password: string
   level: Level
+  language: Language
   isActive: boolean
   companies: []
   respId: string

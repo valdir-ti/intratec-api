@@ -10,5 +10,6 @@ export interface CreateUserRequestDTO {
   respId: string
   id?: string
   level?: any
+  language?: any
   companies?: []
 }
